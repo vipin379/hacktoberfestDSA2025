@@ -15,6 +15,7 @@ int binarySearch(vector<int> &arr, int target) {
         int mid = low + (high - low) / 2; // prevent overflow
 
         if (arr[mid] == target)
+        //check
             return mid; // target found
         else if (arr[mid] < target)
             low = mid + 1; // search right half
