@@ -1,64 +1,63 @@
-// C++ Program to check if a Linked list contains a cycle
-
 #include <iostream>
 using namespace std;
 
-struct Node{
-    public:
+struct Node {
     int data;
     Node* next;
-    Node(int val){
-        data = val;
-        next = nullptr;
-    }
+    explicit Node(int val) : data(val), next(nullptr) {} // explicit constructor
 };
 
-bool hasCycle(Node* head){
-    if(head == nullptr || head->next == nullptr){
-        return false;
-    }
+// Function to check if linked list contains a cycle
+bool hasCycle(Node* head) {
+    if (!head || !head->next) return false;
+
     Node* slow = head;
     Node* fast = head;
-    while(fast != nullptr && fast->next != nullptr){
+
+    while (fast && fast->next) {
         slow = slow->next;
         fast = fast->next->next;
-        if(slow == fast){
+
+        if (slow == fast) { // cycle detected
             return true;
         }
     }
-    return false;
+
+    return false; // no cycle
 }
 
 int main() {
+    // Linked list 1 (with cycle)
     Node* one = new Node(1);
     Node* two = new Node(2);
     Node* three = new Node(3);
     Node* four = new Node(4);
     Node* five = new Node(5);
-    Node* head1 = one;
+
     one->next = two;
     two->next = three;
     three->next = four;
     four->next = five;
-    five->next = two;
-    cout<<"Linked list 1:"<<endl;
-    if(hasCycle(head1)){
-        cout<<"Result: Cycle detected"<<endl;
-    }else{
-        cout<<"Result: No cycle detected."<<endl;
-    }
-    cout<<endl;
+    five->next = two; // cycle here
+
+    cout << "Linked list 1:" << endl;
+    cout << "Result: " << (hasCycle(one) ? "Cycle detected" : "No cycle detected") << endl;
+
+    // Linked list 2 (no cycle)
     Node* ten = new Node(10);
     Node* twenty = new Node(20);
     Node* thirty = new Node(30);
-    Node* head2 = ten;
+
     ten->next = twenty;
     twenty->next = thirty;
-    cout<<"Linked list 2:"<<endl;
-    if(hasCycle(head2)){
-        cout<<"Result: Cycle detected"<<endl;
-    }else{
-        cout<<"Result: No cycle detected."<<endl;
-    }
+
+    cout << "\nLinked list 2:" << endl;
+    cout << "Result: " << (hasCycle(ten) ? "Cycle detected" : "No cycle detected") << endl;
+
+    // Optional: free memory for non-cyclic list
+    delete thirty;
+    delete twenty;
+    delete ten;
+
     return 0;
 }

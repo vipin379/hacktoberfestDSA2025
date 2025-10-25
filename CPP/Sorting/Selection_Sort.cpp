@@ -15,7 +15,8 @@ void selection_sort(vector<int> &arr, int n)
                 minIndex = j;
             }
         }
-        swap(arr[minIndex], arr[i]);
+        if (minIndex != i) // only swap if needed
+            swap(arr[minIndex], arr[i]);
     }
 }
 
@@ -23,9 +24,7 @@ void selection_sort(vector<int> &arr, int n)
 void printArray(const vector<int> &arr, int n)
 {
     for (int i = 0; i < n; i++)
-    {
         cout << arr[i] << " ";
-    }
     cout << endl;
 }
 
@@ -39,9 +38,7 @@ int main()
     vector<int> arr(n);
     cout << "Enter " << n << " elements: ";
     for (int i = 0; i < n; i++)
-    {
         cin >> arr[i];
-    }
 
     cout << "Original array: ";
     printArray(arr, n);

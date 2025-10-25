@@ -2,23 +2,23 @@
 #include <string.h>
 
 int main() {
-    char str[100], substr[50];
+    char mainStr[100], subStr[50];
 
     // Input main string
     printf("Enter the main string: ");
-    fgets(str, sizeof(str), stdin);
-    str[strcspn(str, "\n")] = '\0'; // remove trailing newline
+    fgets(mainStr, sizeof(mainStr), stdin);
+    mainStr[strcspn(mainStr, "\n")] = '\0'; // remove trailing newline
 
     // Input substring
     printf("Enter the substring to search: ");
-    fgets(substr, sizeof(substr), stdin);
-    substr[strcspn(substr, "\n")] = '\0'; // remove newline
+    fgets(subStr, sizeof(subStr), stdin);
+    subStr[strcspn(subStr, "\n")] = '\0'; // remove trailing newline
 
-    // Use strstr() to find substring
-    char *pos = strstr(str, substr);
+    // Search for substring
+    char *position = strstr(mainStr, subStr);
 
-    if (pos != NULL) {
-        printf("Substring found at position: %ld\n", pos - str + 1); // 1-based index
+    if (position != NULL) {
+        printf("Substring found at position: %ld\n", position - mainStr + 1); // 1-based index
     } else {
         printf("Substring not found.\n");
     }
