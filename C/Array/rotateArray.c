@@ -2,9 +2,11 @@
 
 // Function to rotate array to the right by k positions
 void rotateArray(int arr[], int n, int k) {
-    k = k % n; // In case k > n
+    if (k == 0 || n == 0) return; // No rotation needed
+
+    k = k % n; // Handle cases where k > n
     int temp[k];
-    
+
     // Store last k elements in temp
     for (int i = 0; i < k; i++) {
         temp[i] = arr[n - k + i];
